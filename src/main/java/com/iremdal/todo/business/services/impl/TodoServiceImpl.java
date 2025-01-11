@@ -46,6 +46,7 @@ public class TodoServiceImpl implements ITodoService<TodoDto, TodoEntity> {
         }
         TodoEntity todoEntitySave = dtoToEntity(todoDto);
         UsersEntity usersEntity = iUsersRepository.findById(todoDto.getUserId()).orElseThrow(() -> new _404_NotFoundException("kullanıcı bulunamadı"));
+        usersEntity.addTask(todoEntitySave);
         TodoEntity savedEntity = iTodoRepository.save(todoEntitySave);
         return entityToDto(savedEntity);
     }
